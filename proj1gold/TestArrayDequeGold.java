@@ -23,7 +23,7 @@ public class TestArrayDequeGold {
     public void randomCompare() {
         StudentArrayDeque<Integer> sad1 = new StudentArrayDeque<>();
         ArrayDequeSolution<Integer> ads1 = new ArrayDequeSolution<>();
-        int  expected = ads1.size();
+        int expected;
         int actual;
         Integer intExpected;
         Integer intActual;
@@ -33,15 +33,13 @@ public class TestArrayDequeGold {
                 case 0: //addFirst
                     sad1.addFirst(i);
                     ads1.addFirst(i);
+                    System.out.println("addFirst(" + i + ")");
+                    break;
                 case 1: //addLast
                     sad1.addLast(i);
                     ads1.addLast(i);
-            }
-            if(sad1.size() != 0 && ads1.size() !=0) {
-                int randomIndex = StdRandom.uniform(sad1.size());
-                intExpected = sad1.get(randomIndex);
-                intActual = sad1.get(randomIndex);
-                assertEquals("get() error", intExpected, intActual);
+                    System.out.println("addLast(" + i + ")");
+                    break;
             }
         }
         for (int i = 0; i < 100; i+= 1) {
@@ -51,16 +49,19 @@ public class TestArrayDequeGold {
                     if(sad1.size() != 0 && ads1.size() !=0) {
                         intExpected =  sad1.removeFirst();
                         intActual = ads1.removeFirst();
-                        assertEquals("removeLast() error", intExpected, intActual);
+                        System.out.println("removeFirst()");
+                        assertEquals("removeLast()", intExpected, intActual);
                     }
+                    break;
                 case 1: //removeLast
                     if(sad1.size() != 0 && ads1.size() !=0) {
                         intExpected = sad1.removeLast();
                         intActual = ads1.removeLast();
-                        assertEquals("removeLast() error", intExpected, intActual);
+                        System.out.println("removeLast()");
+                        assertEquals("removeLast()", intExpected, intActual);
                     }
+                    break;
             }
-            testGetAndSize(ads1, sad1);
         }
 
         for (int i = 0; i < 100000; i+= 1) {
@@ -69,31 +70,30 @@ public class TestArrayDequeGold {
                 case 0: //addFirst
                     sad1.addFirst(i);
                     ads1.addFirst(i);
+                    System.out.println("addFirst(" + i + ")");
+                    break;
                 case 1: //addLast
                     sad1.addLast(i);
                     ads1.addLast(i);
+                    System.out.println("addLast(" + i + ")");
+                    break;
                 case 2: //removeFirst
                     if(sad1.size() != 0 && ads1.size() !=0) {
                         intExpected =  sad1.removeFirst();
                         intActual = ads1.removeFirst();
-                        assertEquals("removeLast() error", intExpected, intActual);
+                        System.out.println("removeFirst()");
+                        assertEquals("removeLast(" + i + ")", intExpected, intActual);
                     }
+                    break;
                 case 3: //removeLast
                     if(sad1.size() != 0 && ads1.size() !=0) {
                         intExpected = sad1.removeLast();
                         intActual = ads1.removeLast();
-                        assertEquals("removeLast() error", intExpected, intActual);
+                        System.out.println("removeLast()");
+                        assertEquals("removeLast(" + i + ")", intExpected, intActual);
                     }
+                    break;
             }
-            if(sad1.size() != 0 && ads1.size() !=0) {
-                int randomIndex = StdRandom.uniform(sad1.size());
-                intExpected = sad1.get(randomIndex);
-                intActual = sad1.get(randomIndex);
-                assertEquals("get() error", intExpected, intActual);
-            }
-            expected = ads1.size();
-            actual = sad1.size();
-            assertEquals("size() error!", expected, actual);
         }
     }
 }
